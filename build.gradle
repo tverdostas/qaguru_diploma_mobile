@@ -1,0 +1,75 @@
+plugins {
+    id 'java-library'
+    id 'io.qameta.allure' version '2.11.2'
+    id 'io.freefair.lombok' version '8.14.2'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+def allureVersion = "2.21.0",
+selenideVersion = "7.9.4"
+
+allure {
+    report {
+        version.set(allureVersion)
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set(allureVersion)
+            }
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation (
+            "org.junit.jupiter:junit-jupiter:5.9.3",
+            "org.slf4j:slf4j-simple:2.0.17",
+            "com.codeborne:selenide:$selenideVersion",
+            "io.qameta.allure:allure-selenide:2.29.1",
+            "com.codeborne:selenide-video-recorder:7.6.0",
+            "io.rest-assured:rest-assured:5.1.0",
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
+            "org.assertj:assertj-core:3.24.2",
+            "com.fasterxml.jackson.core:jackson-databind:2.15.2",
+            "com.fasterxml.jackson.core:jackson-core:2.15.2",
+            "com.fasterxml.jackson.core:jackson-annotations:2.15.2",
+            "com.google.code.gson:gson:2.9.0",
+    )
+    testImplementation 'org.projectlombok:lombok:1.18.28'
+
+    testRuntimeOnly(
+        "org.slf4j:slf4j-simple:2.0.17")
+}
+
+test {
+    useJUnitPlatform()
+    systemProperties = System.properties // чтобы не потерять остальные системные свойства
+    systemProperty 'userLogin', project.findProperty('userLogin') ?: ''
+    systemProperty 'userPassword', project.findProperty('userPassword') ?: ''
+    systemProperty 'baseUrl', project.findProperty('baseUrl') ?: ''
+    systemProperty 'dealsUrl', project.findProperty('dealsUrl') ?: ''
+    systemProperty 'apiWebhook', project.findProperty('apiWebhook') ?: ''
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
