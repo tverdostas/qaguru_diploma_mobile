@@ -1,9 +1,7 @@
 package tests;
 
-import io.appium.java_client.AppiumBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import pageobjects.AllowWindow;
 import pageobjects.CrmPage;
 import pageobjects.SignInPage;
@@ -76,5 +74,11 @@ public class LoginTests extends TestBase {
 
         signInPage.clickElement(signInPage.CLOSE_BUTTON, "Кнопка Close");
         signInPage.theElementIsDisplayed(signInPage.CREATE_FOR_FREE_BUTTON, "Кнопка Create for Free");
+    }
+
+    @Test
+    @DisplayName("Лого отображается на главной странице")
+    public void LogoIsDisplayed() {
+        signInPage.theElementIsDisplayed(signInPage.MAIN_LOGO, "Основной логотип");
     }
 }

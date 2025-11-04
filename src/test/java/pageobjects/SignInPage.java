@@ -24,7 +24,7 @@ public class SignInPage extends BasePage {
     private final String ENTER_EMAIL_FIELD = "com.bitrix24.android:id/input";
     private final String CONTINUE_BUTTON = "com.bitrix24.android:id/btnNext";
     private final String CANNOT_SIGN_IN = "com.bitrix24.android:id/btnHelp";
-    private final String MAIN_LOGO = "com.bitrix24.android:id/logo";
+    public final By MAIN_LOGO = AppiumBy.id("com.bitrix24.android:id/logo");
     private final String PAGE_TITLE_SIGN_IN_USING_ADDRESS = "com.bitrix24.android:id/title";
     private final String MESSAGE = "android:id/message";
     public final By HELP_BUTTON = AppiumBy.androidUIAutomator("text(\"Help\")");
