@@ -10,8 +10,10 @@ tasks.withType(JavaCompile) {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-def allureVersion = "2.21.0",
-selenideVersion = "7.9.4"
+def allureVersion = "2.21.0"
+def selenideVersion = "7.9.4"
+def seleniumVersion = "4.19.1" // совместимая версия для Selenide 7.9.4 и Appium 10.0.0
+def appiumVersion = "9.2.3"
 
 allure {
     report {
@@ -32,25 +34,37 @@ repositories {
 }
 
 dependencies {
-    testImplementation (
+    // Явно фиксируем версию Selenium — это КЛЮЧ
+    testImplementation "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
+
+    testImplementation(
             "org.junit.jupiter:junit-jupiter:5.9.3",
             "org.slf4j:slf4j-simple:2.0.17",
-            "com.codeborne:selenide:$selenideVersion",
+
+            // Selenide — с исключением своего Selenium, чтобы использовать нашу версию
+            "com.codeborne:selenide:${selenideVersion}",
             "io.qameta.allure:allure-selenide:2.29.1",
             "com.codeborne:selenide-video-recorder:7.6.0",
+
+            // Appium — тоже исключаем Selenium, чтобы не было конфликта
+            "io.appium:java-client:${appiumVersion}",
+
             "io.rest-assured:rest-assured:5.1.0",
-            "io.qameta.allure:allure-rest-assured:$allureVersion",
-            "io.appium:java-client:10.0.0",
+            "io.qameta.allure:allure-rest-assured:${allureVersion}",
             "org.assertj:assertj-core:3.24.2",
             "com.fasterxml.jackson.core:jackson-databind:2.15.2",
-            "com.fasterxml.jackson.core:jackson-core:2.15.2",
-            "com.fasterxml.jackson.core:jackson-annotations:2.15.2",
             "com.google.code.gson:gson:2.9.0",
+            "com.google.code.findbugs:jsr305:3.0.2"
     )
-    testImplementation 'org.projectlombok:lombok:1.18.28'
+}
 
-    testRuntimeOnly(
-        "org.slf4j:slf4j-simple:2.0.17")
+// Гарантируем, что транзитивные зависимости от Selenide и Appium не подтягивают другой Selenium
+configurations.all {
+    resolutionStrategy {
+        force "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
+        force "org.seleniumhq.selenium:selenium-api:${seleniumVersion}"
+        force "org.seleniumhq.selenium:selenium-remote-driver:${seleniumVersion}"
+    }
 }
 
 test {
