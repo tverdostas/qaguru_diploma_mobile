@@ -1,7 +1,9 @@
 package pageobjects;
 
 import io.appium.java_client.android.AndroidDriver;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -40,5 +42,20 @@ public class BasePage {
                 }
             }
         }
+    }
+
+    @Step("Элемент '{elementName}' отображается на экране")
+    public boolean theElementIsDisplayed(By locator, String elementName) {
+        try {
+            return driver.findElement(locator).isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    @Step("Тап по элементу '{elementName}'")
+    public void clickElement(By locator, String elementName) {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        element.click();
     }
 }
