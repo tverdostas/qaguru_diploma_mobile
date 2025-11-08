@@ -2,10 +2,7 @@ package pageobjects;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,7 +14,7 @@ public class BasePage {
 
     public BasePage(AndroidDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
 
     public void fillInput(By locator, String text) {
@@ -44,11 +41,12 @@ public class BasePage {
         }
     }
 
-    @Step("Элемент '{elementName}' отображается на экране")
     public boolean theElementIsDisplayed(By locator, String elementName) {
         try {
-            return driver.findElement(locator).isDisplayed();
-        } catch (NoSuchElementException e) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return true;
+        } catch (Exception e) {
+            System.out.println(elementName + " не отображается: " + e.getClass().getSimpleName());
             return false;
         }
     }

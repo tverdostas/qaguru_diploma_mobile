@@ -42,7 +42,13 @@ public class SignInPage extends BasePage {
     @Step
     @DisplayName("Кнопка \"Enter address\" отображается на экране")
     public boolean enterAddressButtonDisplayed() {
-        return driver.findElement(ENTER_ADDRESS_BUTTON).isDisplayed();
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(15))
+                    .until(ExpectedConditions.visibilityOfElementLocated(ENTER_ADDRESS_BUTTON));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
     @Step

@@ -48,14 +48,16 @@ dependencies {
 
             // Appium — тоже исключаем Selenium, чтобы не было конфликта
             "io.appium:java-client:${appiumVersion}",
-
+            "org.aeonbits.owner:owner:1.0.4",
             "io.rest-assured:rest-assured:5.1.0",
             "io.qameta.allure:allure-rest-assured:${allureVersion}",
             "org.assertj:assertj-core:3.24.2",
             "com.fasterxml.jackson.core:jackson-databind:2.15.2",
             "com.google.code.gson:gson:2.9.0",
-            "com.google.code.findbugs:jsr305:3.0.2"
+            "com.google.code.findbugs:jsr305:3.0.2",
+            "org.aeonbits.owner:owner-java8:1.0.12"
     )
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.8.2')
 }
 
 // Гарантируем, что транзитивные зависимости от Selenide и Appium не подтягивают другой Selenium
@@ -69,12 +71,12 @@ configurations.all {
 
 test {
     useJUnitPlatform()
-    systemProperties = System.properties // чтобы не потерять остальные системные свойства
+/*    systemProperties = System.properties // чтобы не потерять остальные системные свойства
     systemProperty 'userLogin', project.findProperty('userLogin') ?: ''
     systemProperty 'userPassword', project.findProperty('userPassword') ?: ''
     systemProperty 'baseUrl', project.findProperty('baseUrl') ?: ''
     systemProperty 'dealsUrl', project.findProperty('dealsUrl') ?: ''
-    systemProperty 'apiWebhook', project.findProperty('apiWebhook') ?: ''
+    systemProperty 'apiWebhook', project.findProperty('apiWebhook') ?: ''*/
 }
 
 tasks.withType(Test) {

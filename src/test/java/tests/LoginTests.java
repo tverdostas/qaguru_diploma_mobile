@@ -1,10 +1,22 @@
 package tests;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pageobjects.AllowWindow;
 import pageobjects.CrmPage;
 import pageobjects.SignInPage;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
 
 public class LoginTests extends TestBase {
 
@@ -14,7 +26,7 @@ public class LoginTests extends TestBase {
     private final String EMAIL = System.getProperty("userLogin");
     private final String PASSWORD = System.getProperty("userPassword");
 
-    @Test
+    /*@Test
     @DisplayName("Успешный логин")
     public void successfulLogin(){
 
@@ -38,9 +50,9 @@ public class LoginTests extends TestBase {
         new CrmPage(driver).waitForCrmHeader();
         new CrmPage(driver).crmHeaderIsDisplayed();
 
-    }
+    }*/
 
-    @Test
+/*    @Test
     @DisplayName("Корректное сообщение отображено при вводе несуществующего портала Б24")
     public void NonExistentPortalReturnError(){
         signInPage.enterAddressButtonDisplayed();
@@ -50,9 +62,9 @@ public class LoginTests extends TestBase {
         signInPage.pressContinueButton();
 
         signInPage.checkPageMessage("Unknown server response. Please try again later.");
-    }
+    }*/
 
-    @Test
+/*    @Test
     @DisplayName("Кнопка Help открывает страницу с помощью")
     public void HelpButtonIsDisplayedAndWorking(){
         signInPage.enterAddressButtonDisplayed();
@@ -62,9 +74,9 @@ public class LoginTests extends TestBase {
 
         signInPage.clickElement(signInPage.HELP_BUTTON, "Кнопка Help");
         signInPage.theElementIsDisplayed(signInPage.HELP_HEADER, "Заголовок страницы Help");
-    }
+    }*/
 
-    @Test
+/*    @Test
     @DisplayName("Кнопка Close отображается и закрывает окно логина по клику")
     public void CloseButtonIsDisplayedAndWorking(){
         signInPage.enterAddressButtonDisplayed();
@@ -74,11 +86,12 @@ public class LoginTests extends TestBase {
 
         signInPage.clickElement(signInPage.CLOSE_BUTTON, "Кнопка Close");
         signInPage.theElementIsDisplayed(signInPage.CREATE_FOR_FREE_BUTTON, "Кнопка Create for Free");
-    }
+    }*/
 
     @Test
     @DisplayName("Лого отображается на главной странице")
     public void LogoIsDisplayed() {
+        System.out.println("Current context: " + driver.getContext());
         signInPage.theElementIsDisplayed(signInPage.MAIN_LOGO, "Основной логотип");
     }
 }

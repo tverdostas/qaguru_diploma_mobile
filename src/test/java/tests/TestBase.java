@@ -1,63 +1,57 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.logevents.SelenideLogger;
+import com.codeborne.selenide.WebDriverRunner;
+import config.MobileConfig;
+import helpers.Attach;
+import helpers.MobileWebDriverProvider;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.options.UiAutomator2Options;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import pageobjects.AllowWindow;
 import pageobjects.SignInPage;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.time.Duration;
-
-import static com.codeborne.selenide.Selenide.open;
 
 public class TestBase {
 
     protected AndroidDriver driver;
     protected SignInPage signInPage;
 
-/*    @BeforeAll
-    static void beforeAll(){
-        Configuration.browser = CustomMobileDriver.class.getName();
-        Configuration.browserSize = null;
-        Configuration.timeout = 30000;
-    }*/
+    private static final MobileConfig config = ConfigFactory.create(
+            MobileConfig.class,
+            System.getProperties(),
+            System.getenv()
+    );
 
-    @BeforeEach
+   @BeforeEach
     void setUp() {
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("platformName", "Android");
-        caps.setCapability("appium:automationName", "UiAutomator2");
-        caps.setCapability("appium:deviceName", "emulator-5554");
-        caps.setCapability("appium:appPackage", "com.bitrix24.android");
-        caps.setCapability("appium:appActivity", "com.bitrix24.android.BX24Activity");
+        // Создаём драйвер через провайдер (или вручную через UiAutomator2Options)
         try {
-            driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), caps);
+            MobileWebDriverProvider provider = new MobileWebDriverProvider();
+            driver = (AndroidDriver) provider.get();
+            if (driver == null) {
+                throw new IllegalStateException("Driver is null!");
+            }
+            WebDriverRunner.setWebDriver(driver);
             signInPage = new SignInPage(driver);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Invalid Appium server URL", e);
+        } catch (Exception e) {
+            e.printStackTrace(); // <-- Убедитесь, что вы видите полную ошибку
+            throw new RuntimeException("Driver setup failed", e);
         }
     }
-
     @AfterEach
     void tearDown() {
+        
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
+        
         try {
-            Thread.sleep(5000); // подождать 5 секунд перед закрытием
+            Thread.sleep(5); // подождать 5 секунд перед закрытием
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
         if (driver != null) {
+            WebDriverRunner.closeWebDriver();
             driver.quit();
         }
     }
