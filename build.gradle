@@ -55,7 +55,8 @@ dependencies {
             "com.fasterxml.jackson.core:jackson-databind:2.15.2",
             "com.google.code.gson:gson:2.9.0",
             "com.google.code.findbugs:jsr305:3.0.2",
-            "org.aeonbits.owner:owner-java8:1.0.12"
+            "org.aeonbits.owner:owner-java8:1.0.12",
+            'io.qameta.allure:allure-junit5:2.29.0'
     )
     testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.8.2')
 }
