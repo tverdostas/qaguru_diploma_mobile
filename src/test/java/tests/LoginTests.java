@@ -26,7 +26,7 @@ public class LoginTests extends TestBase {
     private final String EMAIL = System.getProperty("userLogin");
     private final String PASSWORD = System.getProperty("userPassword");
 
-    /*@Test
+@Test
     @DisplayName("Успешный логин")
     public void successfulLogin(){
 
@@ -50,9 +50,9 @@ public class LoginTests extends TestBase {
         new CrmPage(driver).waitForCrmHeader();
         new CrmPage(driver).crmHeaderIsDisplayed();
 
-    }*/
+    }
 
-/*    @Test
+    @Test
     @DisplayName("Корректное сообщение отображено при вводе несуществующего портала Б24")
     public void NonExistentPortalReturnError(){
         signInPage.enterAddressButtonDisplayed();
@@ -62,9 +62,9 @@ public class LoginTests extends TestBase {
         signInPage.pressContinueButton();
 
         signInPage.checkPageMessage("Unknown server response. Please try again later.");
-    }*/
+    }
 
-/*    @Test
+    @Test
     @DisplayName("Кнопка Help открывает страницу с помощью")
     public void HelpButtonIsDisplayedAndWorking(){
         signInPage.enterAddressButtonDisplayed();
@@ -74,9 +74,9 @@ public class LoginTests extends TestBase {
 
         signInPage.clickElement(signInPage.HELP_BUTTON, "Кнопка Help");
         signInPage.theElementIsDisplayed(signInPage.HELP_HEADER, "Заголовок страницы Help");
-    }*/
+    }
 
-/*    @Test
+    @Test
     @DisplayName("Кнопка Close отображается и закрывает окно логина по клику")
     public void CloseButtonIsDisplayedAndWorking(){
         signInPage.enterAddressButtonDisplayed();
@@ -86,7 +86,7 @@ public class LoginTests extends TestBase {
 
         signInPage.clickElement(signInPage.CLOSE_BUTTON, "Кнопка Close");
         signInPage.theElementIsDisplayed(signInPage.CREATE_FOR_FREE_BUTTON, "Кнопка Create for Free");
-    }*/
+    }
 
     @Test
     @DisplayName("Лого отображается на главной странице")

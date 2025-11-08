@@ -21,7 +21,7 @@ public interface MobileConfig extends Config {
     String automationName();
 
     @Key("deviceName")
-    //@DefaultValue("emulator-5556")
+    // @DefaultValue("emulator-5556")
     String deviceName();
 
     @Key("appPackage")

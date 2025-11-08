@@ -58,7 +58,8 @@ dependencies {
             "org.aeonbits.owner:owner-java8:1.0.12",
             'io.qameta.allure:allure-junit5:2.29.0'
     )
-    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.8.2')
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.8.2',
+            'io.qameta.allure:allure-junit5:2.29.0')
 }
 
 // Гарантируем, что транзитивные зависимости от Selenide и Appium не подтягивают другой Selenium
