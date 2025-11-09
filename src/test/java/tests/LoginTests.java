@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pageobjects.AllowWindow;
@@ -10,7 +11,13 @@ public class LoginTests extends TestBase {
     private final String PORTAL_ADDRESS = System.getProperty("portalName");
     private final String EMAIL = System.getProperty("userLogin");
     private final String PASSWORD = System.getProperty("userPassword");
-    SignInPage signInPage = new SignInPage(driver);
+
+    @Override
+    @BeforeEach
+    void setUp() {
+        super.setUp();
+        signInPage = new SignInPage(driver);
+    }
 
     @Test
     @DisplayName("Успешный логин")
