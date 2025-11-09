@@ -31,7 +31,6 @@ public class TestBase {
                 throw new IllegalStateException("Driver is null!");
             }
             WebDriverRunner.setWebDriver(driver);
-            signInPage = new SignInPage(driver);
         } catch (Exception e) {
             e.printStackTrace(); // <-- Убедитесь, что вы видите полную ошибку
             throw new RuntimeException("Driver setup failed", e);

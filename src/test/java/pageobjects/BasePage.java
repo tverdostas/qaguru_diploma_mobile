@@ -51,9 +51,9 @@ public class BasePage {
         }
     }
 
-    @Step("Тап по элементу '{elementName}'")
+/*    @Step("Тап по элементу '{elementName}'")
     public void clickElement(By locator, String elementName) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
         element.click();
-    }
+    }*/
 }
