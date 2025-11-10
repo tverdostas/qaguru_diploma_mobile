@@ -65,8 +65,8 @@ public class MobileWebDriverProvider implements Supplier<AppiumDriver> {
 
         try {
             // 🔐 Достаём креды — можно задать через переменные окружения
-            String username = System.getenv("BROWSERSTACK_USERNAME");
-            String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
+            String username = System.getProperty("BROWSERSTACK_USERNAME");
+            String accessKey = System.getProperty("BROWSERSTACK_ACCESS_KEY");
 
             // Кодируем ключ (на случай, если в нём есть спецсимволы вроде '@' или '&')
             String encodedKey = URLEncoder.encode(accessKey, StandardCharsets.UTF_8);
