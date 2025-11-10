@@ -8,27 +8,33 @@ import org.aeonbits.owner.Config.Sources;
 })
 public interface MobileConfig extends Config {
 
-    @Key("platformVersion")
+    @Key("platform.version")
     @DefaultValue("13.0")
     String platformVersion();
 
-    @Key("platformName")
+    @Key("user.login")
+    String userLogin();
+
+    @Key("user.password")
+    String userPassword();
+
+    @Key("platform.name")
     @DefaultValue("Android")
     String platformName();
 
-    @Key("automationName")
+    @Key("automation.name")
     @DefaultValue("UiAutomator2")
     String automationName();
 
-    @Key("deviceName")
-    // @DefaultValue("emulator-5556")
+    @Key("device.name")
+        // @DefaultValue("emulator-5556")
     String deviceName();
 
-    @Key("appPackage")
+    @Key("app.package")
     @DefaultValue("com.bitrix24.android")
     String appPackage();
 
-    @Key("appActivity")
+    @Key("app.activity")
     @DefaultValue("com.bitrix24.android.BX24Activity")
     String appActivity();
 
@@ -39,7 +45,7 @@ public interface MobileConfig extends Config {
     @Key("browserstack.key")
     String browserstackKey();
 
-    @Key("browserstack.buildName")
+    @Key("browserstack.build.name")
     @DefaultValue("Bitrix24 Mobile Tests")
     String browserstackBuildName();
 
@@ -48,15 +54,15 @@ public interface MobileConfig extends Config {
     String browserstackApp();
 
     // URL драйвера (Appium hub или BrowserStack endpoint)
-    @Key("driverUrl")
+    @Key("driver.url")
     @DefaultValue("https://hub-cloud.browserstack.com/wd/hub")
     String driverUrl();
 
-    @Key("noReset")
+    @Key("no.reset")
     @DefaultValue("true")
     boolean noReset();
 
-    @Key("setAppWaitForLaunch")
+    @Key("set.app.wait.for.launch")
     @DefaultValue("true")
     boolean setAppWaitForLaunch();
 }
