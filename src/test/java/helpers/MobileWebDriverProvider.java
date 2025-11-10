@@ -48,8 +48,8 @@ public class MobileWebDriverProvider implements Supplier<AppiumDriver> {
 
         // Для BrowserStack — добавляем через setCapability (т.к. это кастомные capabilities)
         if (config.driverUrl().contains("browserstack")) {
-/*            options.setCapability("browserstack.user", config.browserstackUser());
-            options.setCapability("browserstack.key", config.browserstackKey());*/
+            options.setCapability("browserstack.user", config.browserstackUser());
+            options.setCapability("browserstack.key", config.browserstackKey());
             options.setCapability("build", config.browserstackBuildName());
             options.setCapability("app", config.browserstackApp());
             options.setCapability("deviceName", config.deviceName());
