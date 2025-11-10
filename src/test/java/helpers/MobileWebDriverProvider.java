@@ -75,7 +75,7 @@ public class MobileWebDriverProvider implements Supplier<AppiumDriver> {
             String driverUrl = "https://" + username + ":" + encodedKey + "@hub-cloud.browserstack.com/wd/hub";
 
             // Для отладки — покажи итоговый URL (без ключа)
-            System.out.println("Connecting to BrowserStack as user: " + username);
+            System.out.println("Connecting to BrowserStack as user: " + driverUrl);
             System.out.println("Driver URL: https://hub-cloud.browserstack.com/wd/hub");
 
             // Создаём драйвер
