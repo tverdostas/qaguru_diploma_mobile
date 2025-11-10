@@ -48,8 +48,8 @@ public class MobileWebDriverProvider implements Supplier<AppiumDriver> {
 
         // Для BrowserStack — добавляем через setCapability (т.к. это кастомные capabilities)
         if (config.driverUrl().contains("browserstack")) {
-            options.setCapability("browserstack.user", config.browserstackUser());
-            options.setCapability("browserstack.key", config.browserstackKey());
+/*            options.setCapability("browserstack.user", config.browserstackUser());
+            options.setCapability("browserstack.key", config.browserstackKey());*/
             options.setCapability("build", config.browserstackBuildName());
             options.setCapability("app", config.browserstackApp());
             options.setCapability("deviceName", config.deviceName());
@@ -67,12 +67,6 @@ public class MobileWebDriverProvider implements Supplier<AppiumDriver> {
             // 🔐 Достаём креды — можно задать через переменные окружения
             String username = System.getenv("BROWSERSTACK_USERNAME");
             String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
-
-            // Если переменные не заданы — подставь временно вручную (для локальной проверки)
-            if (username == null || accessKey == null) {
-                username = "test_C4wtzm";
-                accessKey = "FfDtsF7qMzjUpytk9gqK";
-            }
 
             // Кодируем ключ (на случай, если в нём есть спецсимволы вроде '@' или '&')
             String encodedKey = URLEncoder.encode(accessKey, StandardCharsets.UTF_8);
