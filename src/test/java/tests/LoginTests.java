@@ -1,5 +1,7 @@
 package tests;
 
+import config.MobileConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,9 +10,12 @@ import pageobjects.CrmPage;
 import pageobjects.SignInPage;
 
 public class LoginTests extends TestBase {
-    private final String PORTAL_ADDRESS = System.getProperty("portalName");
-    private final String EMAIL = System.getProperty("userLogin");
-    private final String PASSWORD = System.getProperty("userPassword");
+    // Получаем конфигурацию через owner
+    private static final MobileConfig config = ConfigFactory.create(MobileConfig.class, System.getProperties());
+
+    private final String PORTAL_ADDRESS = config.portalName(); // Используем owner
+    private final String EMAIL = config.userLogin();           // Используем owner
+    private final String PASSWORD = config.userPassword();     // Используем owner
 
     @Override
     @BeforeEach
@@ -24,6 +29,10 @@ public class LoginTests extends TestBase {
     public void successfulLogin(){
 
         System.out.println("Driver in test: " + driver);
+
+        // Логирование значений для отладки
+        System.out.println("Portal: " + PORTAL_ADDRESS);
+        System.out.println("Email: " + EMAIL);
 
         signInPage.enterAddressButtonDisplayed();
         signInPage.pressButtonEnterAddress();
