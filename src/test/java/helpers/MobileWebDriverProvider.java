@@ -65,14 +65,21 @@ public class MobileWebDriverProvider implements Supplier<AppiumDriver> {
 
         try {
             // 🔐 Достаём креды — можно задать через переменные окружения
-            String username = System.getProperty("BROWSERSTACK_USER");
-            String accessKey = System.getProperty("BROWSERSTACK_KEY");
+/*            String username = System.getProperty("BROWSERSTACK_USER");
+            String accessKey = System.getProperty("BROWSERSTACK_KEY");*/
+
+
+            // Теперь используем config для получения значений
+            String username = config.browserstackUser();
+            String accessKey = config.browserstackKey();
+            String driverUrl = config.driverUrl();
+
 
             // Кодируем ключ (на случай, если в нём есть спецсимволы вроде '@' или '&')
             String encodedKey = URLEncoder.encode(accessKey, StandardCharsets.UTF_8);
 
             // Формируем URL в правильном формате
-            String driverUrl = "https://" + username + ":" + encodedKey + "@hub-cloud.browserstack.com/wd/hub";
+            //String driverUrl = "https://" + username + ":" + encodedKey + "@hub-cloud.browserstack.com/wd/hub";
 
             // Для отладки — покажи итоговый URL (без ключа)
             System.out.println("Connecting to BrowserStack as user: " + driverUrl);
