@@ -18,6 +18,9 @@ public interface MobileConfig extends Config {
     @Key("user.password")
     String userPassword();
 
+    @Key("portal.name")
+    String portalName();
+
     @Key("platform.name")
     @DefaultValue("Android")
     String platformName();
