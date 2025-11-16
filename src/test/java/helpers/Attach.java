@@ -69,14 +69,18 @@ public class Attach {
      */
     @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
     public static String addVideo() {
-        String sessionId = Selenide.sessionId() != null ? Selenide.sessionId().toString() : null;
-        if (sessionId != null && sessionId.matches("[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}")) {
-            String videoUrl = "https://app-automate.browserstack.com/s3-upload/" + sessionId + "/video.mp4";
-            return "<html><body><video width='100%' height='100%' controls autoplay>" +
-                    "<source src='" + videoUrl + "' type='video/mp4'>" +
-                    "</video></body></html>";
-        } else {
-            return "<html><body>Video not available (not a BrowserStack session)</body></html>";
+        WebDriver driver = getWebDriver();
+        if (driver instanceof AppiumDriver) {
+            AppiumDriver appiumDriver = (AppiumDriver) driver;
+            String sessionId = appiumDriver.getSessionId().toString();
+            // Пример формата sessionId: 123e4567-e89b-12d3-a456-426614174000
+            if (sessionId != null && sessionId.matches("[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}")) {
+                String videoUrl = "https://app-automate.browserstack.com/s3-upload/" + sessionId + "/appium/video.mp4";
+                return "<html><body><video width='100%' height='100%' controls autoplay>" +
+                        "<source src='" + videoUrl + "' type='video/mp4'>" +
+                        "</video></body></html>";
+            }
         }
+        return "<html><body>Video not available (not a BrowserStack session)</body></html>";
     }
 }
