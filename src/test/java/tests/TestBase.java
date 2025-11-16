@@ -17,7 +17,6 @@ public class TestBase {
 
     protected AndroidDriver driver;
     protected SignInPage signInPage;
-    String sessionId = getSessionId();
 
     private static final MobileConfig config = ConfigFactory.create(
             MobileConfig.class,
@@ -42,6 +41,8 @@ public class TestBase {
     }
     @AfterEach
     void tearDown() {
+
+        String sessionId = getSessionId();
         
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
