@@ -9,6 +9,7 @@ import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,6 +23,9 @@ public class Attach {
     private static final MobileConfig config = ConfigFactory.create(MobileConfig.class, System.getProperties());
 
     private static final String videoStorageUrl = config.videoStorageUrl();
+    public static String getSessionId(){
+        return ((RemoteWebDriver) getWebDriver()).getSessionId().toString().replace("selenoid","");
+    }
 
     @Attachment(value = "{attachName}", type = "image/png")
     public static byte[] screenshotAs(String attachName) {

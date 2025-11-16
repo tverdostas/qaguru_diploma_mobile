@@ -10,12 +10,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import pageobjects.SignInPage;
 
+import static helpers.Attach.getSessionId;
 import static io.restassured.RestAssured.sessionId;
 
 public class TestBase {
 
     protected AndroidDriver driver;
     protected SignInPage signInPage;
+    String sessionId = getSessionId();
 
     private static final MobileConfig config = ConfigFactory.create(
             MobileConfig.class,
