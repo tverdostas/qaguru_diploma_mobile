@@ -10,6 +10,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import pageobjects.SignInPage;
 
+import static io.restassured.RestAssured.sessionId;
+
 public class TestBase {
 
     protected AndroidDriver driver;
@@ -42,7 +44,7 @@ public class TestBase {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
-        Attach.addVideo();
+        Attach.attachVideo(sessionId);
         
         try {
             Thread.sleep(5); // подождать 5 секунд перед закрытием

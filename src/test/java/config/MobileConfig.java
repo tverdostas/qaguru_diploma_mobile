@@ -68,4 +68,8 @@ public interface MobileConfig extends Config {
     @Key("set.app.wait.for.launch")
     @DefaultValue("true")
     boolean setAppWaitForLaunch();
+
+    @Key("video.storage.url")
+    @DefaultValue("https://selenoid.autotests.cloud/video/")
+    String videoStorageUrl();
 }

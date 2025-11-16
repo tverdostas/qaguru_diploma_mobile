@@ -1,18 +1,27 @@
 package helpers;
 
 import com.codeborne.selenide.Selenide;
+import config.MobileConfig;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Attachment;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static helpers.BrowserstackHelper.getBrowserstackVideoUrl;
 
 public class Attach {
+
+    private static final MobileConfig config = ConfigFactory.create(MobileConfig.class, System.getProperties());
+
+    private static final String videoStorageUrl = config.videoStorageUrl();
 
     @Attachment(value = "{attachName}", type = "image/png")
     public static byte[] screenshotAs(String attachName) {
@@ -68,19 +77,22 @@ public class Attach {
      * Работает только если sessionId соответствует формату UUID (как у BrowserStack).
      */
     @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
-    public static String addVideo() {
-        WebDriver driver = getWebDriver();
-        if (driver instanceof AppiumDriver) {
-            AppiumDriver appiumDriver = (AppiumDriver) driver;
-            String sessionId = appiumDriver.getSessionId().toString();
-            // Пример формата sessionId: 123e4567-e89b-12d3-a456-426614174000
-            if (sessionId != null && sessionId.matches("[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}")) {
-                String videoUrl = "https://app-automate.browserstack.com/s3-upload/" + sessionId + "/appium/video.mp4";
-                return "<html><body><video width='100%' height='100%' controls autoplay>" +
-                        "<source src='" + videoUrl + "' type='video/mp4'>" +
-                        "</video></body></html>";
-            }
-        }
-        return "<html><body>Video not available (not a BrowserStack session)</body></html>";
+    public static String attachVideo(String sessionId) {
+        return "<html><body><video width='100%' height='100%' controls autoplay><source src='"
+                + getVideoUrl(sessionId)
+                + "' type='video/mp4'></video></body></html>";
     }
+
+    public static String getVideoUrl(String sessionId) {
+            return getBrowserstackVideoUrl(sessionId);
+    }
+
+/*    public static String getWebVideoUrl(String sessionId) {
+        try {
+            return new URL(videoStorageUrl + "/" + sessionId + ".mp4") + "";
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }*/
 }
