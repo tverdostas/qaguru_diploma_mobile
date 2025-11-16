@@ -4,7 +4,6 @@ import com.codeborne.selenide.WebDriverProvider;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import javax.annotation.Nonnull;
@@ -34,7 +33,6 @@ public class BrowserstackDriver implements WebDriverProvider {
         caps.setCapability("name", "first_test");
 
         // Initialise the remote Webdriver using BrowserStack remote URL
-        // and desired capabilities defined above
         try {
             return new RemoteWebDriver(
                     new URL("https://hub.browserstack.com/wd/hub"), caps);

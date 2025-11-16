@@ -5,7 +5,6 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.aeonbits.owner.ConfigFactory;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
@@ -13,8 +12,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Supplier;
 
 public class MobileWebDriverProvider implements Supplier<AppiumDriver> {
@@ -48,8 +45,6 @@ public class MobileWebDriverProvider implements Supplier<AppiumDriver> {
 
         // Для BrowserStack — добавляем через setCapability (т.к. это кастомные capabilities)
         if (config.driverUrl().contains("browserstack")) {
-/*            options.setCapability("browserstack.user", config.browserstackUser());
-            options.setCapability("browserstack.key", config.browserstackKey());*/
             options.setCapability("build", config.browserstackBuildName());
             options.setCapability("app", config.browserstackApp());
             options.setCapability("deviceName", config.deviceName());
@@ -57,17 +52,12 @@ public class MobileWebDriverProvider implements Supplier<AppiumDriver> {
         }
 
         // Логирование всех capabilities перед созданием драйвера
-        //System.out.println("REAL DRIVER URL = " + driverUrl);
         System.out.println("Настройки capabilities:");
         options.asMap().forEach((key, value) -> {
             System.out.println(key + ": " + value);
         });
 
         try {
-            // 🔐 Достаём креды — можно задать через переменные окружения
-/*            String username = System.getProperty("BROWSERSTACK_USER");
-            String accessKey = System.getProperty("BROWSERSTACK_KEY");*/
-
 
             // Теперь используем config для получения значений
             String username = config.browserstackUser();
