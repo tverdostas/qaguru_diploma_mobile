@@ -50,6 +50,7 @@
   <!-- Левая колонка — текст -->
   <div style="flex: 1; min-width: 0;">
     • Автотесты написаны на языке Java<br>
+    • Тестовое устройство для локального запуска Pixel 6 Pro API 34, через BrowserStack - Google Pixel 7<br>
     • Инструмент сборки Gradle<br>
     • Тестовые фреймворки JUnit 5 и REST-assured<br>
     • Удаленный запуск реализован на Jenkins<br>
@@ -74,32 +75,31 @@ gradle clean test -Denv=local
 ```
 
 <a id="jenkins"></a>
-## Сборка в Jenkins ([ссылка](https://jenkins.autotests.cloud/job/qa_guru_diploma_anastasnanas_2/))
-![Сборка в Jenkins](images/screenshots/jenkins_screen.png)
+## Сборка в Jenkins ([ссылка](https://jenkins.autotests.cloud/job/qa_guru_diploma_anastasnanas_mobile/))
+![Сборка в Jenkins](images/screenshots/jenkins_mobile.png)
 
 <a id="allure"></a>
-## Allure отчет ([ссылка](https://jenkins.autotests.cloud/job/qa_guru_diploma_anastasnanas_2/7/allure/#))
+## Allure отчет ([ссылка](https://jenkins.autotests.cloud/job/qa_guru_diploma_anastasnanas_mobile/42/allure/))
 
 🌿 При переходе по ссылке будет открыта вкладка Overview с общей статистикой по прогону. При клике на любой сьют (Suites) будут отображены кейсы с понятными названиями + справа шаги, которые были пройдены автотестом (скрин 2).
 В каждом тесте отчета есть последний скриншот, исходник страницы, логи браузера и видео. Пример видео можно увидеть далее. </div>
 
-![Allure Report Screenshot](images/screenshots/allure_отчет.png)<br>
-![Allure Report Screenshot](images/screenshots/allure_отчет_2.png)<br>
+![Allure Report Screenshot](images/screenshots/allure_report_mobile.png)<br>
+![Allure Report Screenshot](images/screenshots/allure_report_mobile_2.png)<br>
 
 <a id="testops"></a>
-## Allure TestOps ([ссылка](https://allure.autotests.cloud/launch/49793/?treeId=0))
-![Allure TestOps Screenshot](images/screenshots/test_ops.png)<br>
-![Allure TestOps Screenshot](images/screenshots/allure_test_ops_case.png)<br>
+## Allure TestOps ([ссылка](https://allure.autotests.cloud/launch/49858/tree/750881?search=W3siaWQiOiJzdGF0dXMiLCJ0eXBlIjoidGVzdFN0YXR1c0FycmF5IiwidmFsdWUiOlsicGFzc2VkIl19XQ%3D%3D&treeId=0))
+![Allure TestOps Screenshot](images/screenshots/allure_test_ops_case_mobile.png)<br>
 
 <a id="video"></a>
-## Видео прогона теста на создание сделки через UI (часть шагов проходит через API)
+## Видео прогона теста "Успешный логин на портал"
 <p align="center">
-<img src="images/screenshots/video_example.gif " width="1000">
+<img src="images/screenshots/video_example_browserstack.gif" width="300">
 </p>
 
 <a id="telegram"></a>
 ## Уведомления в telegram
 После каждой успешной сборки в мессенджер telegram будет отправлено уведомление со статистикой по прогону, диаграммой, окружением, комментарием и ссылкой на отчет в Jenkins.
 <p align="center">
-<img src="images/screenshots/small_telegram.png" width="500">
+<img src="images/screenshots/telegram_report_mobile.png" width="500">
 </p>
