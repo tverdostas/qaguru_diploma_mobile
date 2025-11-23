@@ -10,6 +10,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import pageobjects.SignInPage;
 
+import static helpers.Attach.getSessionId;
+import static io.restassured.RestAssured.sessionId;
+
 public class TestBase {
 
     protected AndroidDriver driver;
@@ -38,11 +41,13 @@ public class TestBase {
     }
     @AfterEach
     void tearDown() {
+
+        String sessionId = getSessionId();
         
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
-        Attach.addVideo();
+        Attach.attachVideo(sessionId);
         
         try {
             Thread.sleep(5); // подождать 5 секунд перед закрытием
