@@ -30,9 +30,9 @@
 <div align="center">
 <a href="https://www.java.com/"><img alt="Java" height="65" src="images/icons/java_logo.png" width="65"/></a>
 <a href="https://www.jetbrains.com/idea/"><img alt="InteliJ IDEA" height="50" src="images/icons/intellij-idea.png" width="50"/></a>
-<a href="https://developer.android.com/studio"><img alt="Android Studio" height="50" src="" width="50"/></a> 
-<a href="https://appium.io/"><img alt="Appium" height="50" src="" width="50"/></a>
-<a href="https://www.browserstack.com/"><img alt="BrowserStack" height="50" src="" width="50"/></a> 
+<a href="https://developer.android.com/studio"><img alt="Android Studio" height="50" src="images/icons/android-studio.png" width="50"/></a> 
+<a href="https://appium.io/"><img alt="Appium" height="45" src="images/icons/appium.svg" width="45"/></a>
+<a href="https://www.browserstack.com/"><img alt="BrowserStack" height="50" src="images/icons/browser-stack.png" width="50"/></a> 
 <a href="https://gradle.org/"><img alt="Gradle" height="50" src="images/icons/gradle_logo_icon.png" width="50"/></a>  
 <a href="https://junit.org/junit5/"><img alt="JUnit 5" height="45" src="images/icons/junit_5.png" width="45"/></a>
 <a href="https://selenide.org/"><img alt="Selenide" height="50" src="images/icons/selenide.png" width="50"/></a>
