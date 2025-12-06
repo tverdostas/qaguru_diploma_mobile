@@ -53,7 +53,7 @@ public interface MobileConfig extends Config {
     String browserstackBuildName();
 
     @Key("browserstack.app")
-    @DefaultValue("bs://490fd51699f846b0736c908983f9749f5f9cc30d")
+    @DefaultValue("bs://779c595a51cef919ec182f654c6c652e54ebfeb6")
     String browserstackApp();
 
     // URL драйвера (Appium hub или BrowserStack endpoint)
