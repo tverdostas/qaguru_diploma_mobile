@@ -41,7 +41,6 @@ public class MobileWebDriverProvider implements Supplier<AppiumDriver> {
                 .setAppWaitForLaunch(false)
                 .setAppWaitDuration(Duration.ofSeconds(60));
 
-        // String driverUrl = config.driverUrl().trim();
 
         // Для BrowserStack — добавляем через setCapability (т.к. это кастомные capabilities)
         if (config.driverUrl().contains("browserstack")) {

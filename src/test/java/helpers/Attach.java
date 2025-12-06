@@ -11,8 +11,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -90,13 +88,4 @@ public class Attach {
     public static String getVideoUrl(String sessionId) {
             return getBrowserstackVideoUrl(sessionId);
     }
-
-/*    public static String getWebVideoUrl(String sessionId) {
-        try {
-            return new URL(videoStorageUrl + "/" + sessionId + ".mp4") + "";
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }*/
 }

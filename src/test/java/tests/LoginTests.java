@@ -10,12 +10,12 @@ import pageobjects.CrmPage;
 import pageobjects.SignInPage;
 
 public class LoginTests extends TestBase {
-    // Получаем конфигурацию через owner
+
     private static final MobileConfig config = ConfigFactory.create(MobileConfig.class, System.getProperties());
 
-    private final String PORTAL_ADDRESS = config.portalName(); // Используем owner
-    private final String EMAIL = config.userLogin();           // Используем owner
-    private final String PASSWORD = config.userPassword();     // Используем owner
+    private final String PORTAL_ADDRESS = config.portalName();
+    private final String EMAIL = config.userLogin();
+    private final String PASSWORD = config.userPassword();
 
     @Override
     @BeforeEach
